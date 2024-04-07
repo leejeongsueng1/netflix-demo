@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {Outlet} from "react-router-dom";
 import {Button, Form} from "react-bootstrap";
-import LOGO from "./Netflix-Op-Logo.png"
+import LOGO from "./Netflix_logo.svg"
 
 export const AppLayout = () => {
     return (
