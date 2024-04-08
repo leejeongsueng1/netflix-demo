@@ -6,11 +6,13 @@
      4. upcoming movie
 */
 import {Banner} from "./components/Banner/Banner";
+import {PopularMovieSlide} from "./components/PopularMovieSlide/PopularMovieSlide";
 
  export const Homepage = () => {
     return (
         <div>
             <Banner></Banner>
+            <PopularMovieSlide></PopularMovieSlide>
         </div>
     )
 }
