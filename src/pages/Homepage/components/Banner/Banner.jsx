@@ -9,7 +9,12 @@ export const Banner = () => {
     if (isLoading) {
         return (
             <div>
-                <Spinner animation="border" variant="danger"/>
+                <Spinner animation="border" variant="danger"
+                         style={{
+                             width: "5rem",
+                             height: "5rem"
+                         }}
+                />
             </div>
         )
     }

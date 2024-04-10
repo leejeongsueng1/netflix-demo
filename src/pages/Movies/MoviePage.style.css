@@ -1,0 +1,23 @@
+.genre-badge-ground {
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+.genre-item {
+    width:100%;
+    height: 30px;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.genre-item-selected{
+    width:100%;
+    height: 40px;
+    font-weight: bold;
+    color: red;
+    align-items: center;
+    vertical-align: center;
+    justify-content: center;
+}

@@ -1,5 +1,11 @@
 import {UseSearchMovie} from "../../hooks/UseSearchMovie";
-import {useParams, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
+import {Alert, Badge, Button, Col, Container, Row, Spinner} from "react-bootstrap";
+import {MovieCard} from "../../common/MovieCard/MovieCard";
+import ReactPaginate from 'react-paginate';
+import {useEffect, useState} from "react";
+import {useMovieGenreQuery} from "../../hooks/UseMovieGenre";
+import './MoviePage.style.css'
 
 /*
     TODO:
@@ -9,13 +15,132 @@ import {useParams, useSearchParams} from "react-router-dom";
  */
 
 export const MoviePage = () => {
-    const [query,setQuery] = useSearchParams();
+
+    const [query, setQuery] = useSearchParams();
+    const [page, setPage] = useState(1);
+    const [genre, setGenre] = useState('');
+
     const keyword = query.get("q");
-    const {data,isLoading, isError,error} = UseSearchMovie({keyword});
+    const {data: genreData} = useMovieGenreQuery();
+    const {data, isLoading, isError, error} = UseSearchMovie({keyword, page, genre});
+
+    const handlePageClick = ({selected}) => {
+        setPage(selected + 1);
+    };
+
+    useEffect(() => {
+        setPage(1);
+    }, []);
 
     console.log(data);
+    console.log(genreData);
 
-    return (
-        <>MoviePage</>
-    )
+    if (isLoading) {
+        return (
+            <div>
+                <Spinner animation="border" variant="danger"
+                         style={{
+                             width: "5rem",
+                             height: "5rem"
+                         }}
+                />
+            </div>
+        )
+    }
+    if (isError) {
+        return (
+            <Alert variant="danger">
+                <Alert.Heading>Error</Alert.Heading>
+                <p>{error}</p>
+                <hr/>
+                <div className="d-flex justify-content-end">
+                    <Button variant="outline-success">
+                        메인 페이지로
+                    </Button>
+                </div>
+            </Alert>
+        )
+    }
+
+    if (!genre) {
+        return (
+            <Container style={{marginTop: "50px"}}>
+                <Row>
+                    <Col lg={4} xs={12} className="genre-badge-ground">
+                        {genreData.map((genre) => <div itemID={genre.name} className="genre-item"
+                                                       onClick={() => setGenre(genre.id)}>{genre.name}</div>)}
+                    </Col>
+                    <Col lg={8} xs={12}>
+                        <Row>
+                            {data?.results.map((movie, idx) => <Col key={idx} lg={4} xs={12}>
+                                <MovieCard movie={movie}/>
+                            </Col>)}
+                        </Row>
+                        <ReactPaginate
+                            nextLabel="next >"
+                            onPageChange={handlePageClick}
+                            pageRangeDisplayed={3}
+                            marginPagesDisplayed={2}
+                            pageCount={data?.total_pages}    //total pages
+                            previousLabel="< previous"
+                            pageClassName="page-item"
+                            pageLinkClassName="page-link"
+                            previousClassName="page-item"
+                            previousLinkClassName="page-link"
+                            nextClassName="page-item"
+                            nextLinkClassName="page-link"
+                            breakLabel="..."
+                            breakClassName="page-item"
+                            breakLinkClassName="page-link"
+                            containerClassName="pagination"
+                            activeClassName="active"
+                            renderOnZeroPageCount={null}
+                            forcePage={page - 1}
+                        />
+                    </Col>
+                </Row>
+            </Container>
+        )
+    } else {
+        return (
+            <Container style={{marginTop: "50px"}}>
+                <Row>
+                    <Col lg={4} xs={12} className="genre-badge-ground">
+                        {genreData.map((item) => <div itemID={item.name} className={genre == item.id ? "genre-item-selected":"genre-item"}
+                                                       onClick={() => setGenre(item.id)}>{item.name}</div>)}
+                    </Col>
+                    <Col lg={8} xs={12}>
+                        <Row>
+                            {data?.results.filter((movie)=> movie.genre_ids.includes(genre)).map((movie, idx) => <Col key={idx} lg={4} xs={12}>
+                                <MovieCard movie={movie}/>
+                            </Col>)}
+                        </Row>
+                        <ReactPaginate
+                            nextLabel="next >"
+                            onPageChange={handlePageClick}
+                            pageRangeDisplayed={3}
+                            marginPagesDisplayed={2}
+                            pageCount={data?.total_pages}    //total pages
+                            previousLabel="< previous"
+                            pageClassName="page-item"
+                            pageLinkClassName="page-link"
+                            previousClassName="page-item"
+                            previousLinkClassName="page-link"
+                            nextClassName="page-item"
+                            nextLinkClassName="page-link"
+                            breakLabel="..."
+                            breakClassName="page-item"
+                            breakLinkClassName="page-link"
+                            containerClassName="pagination"
+                            activeClassName="active"
+                            renderOnZeroPageCount={null}
+                            forcePage={page - 1}
+                        />
+                    </Col>
+                </Row>
+            </Container>
+        )
+    }
+
+
 }
