@@ -22,18 +22,11 @@ export const MoviePage = () => {
 
     const keyword = query.get("q");
     const {data: genreData} = useMovieGenreQuery();
-    const {data, isLoading, isError, error} = UseSearchMovie({keyword, page, genre});
+    const {data, isLoading, isError, error} = UseSearchMovie({keyword, page});
 
     const handlePageClick = ({selected}) => {
         setPage(selected + 1);
     };
-
-    useEffect(() => {
-        setPage(1);
-    }, []);
-
-    console.log(data);
-    console.log(genreData);
 
     if (isLoading) {
         return (
@@ -71,18 +64,18 @@ export const MoviePage = () => {
                                                        onClick={() => setGenre(genre.id)}>{genre.name}</div>)}
                     </Col>
                     <Col lg={8} xs={12}>
-                        <Row>
-                            {data?.results.map((movie, idx) => <Col key={idx} lg={4} xs={12}>
+                        <Row className={"movie-page-list"}>
+                            {data?.results.map((movie, idx) =><div> <Col key={idx} lg={4} xs={12}>
                                 <MovieCard movie={movie}/>
-                            </Col>)}
+                            </Col></div>)}
                         </Row>
                         <ReactPaginate
-                            nextLabel="next >"
+                            previousLabel="이전"
+                            nextLabel="다음"
                             onPageChange={handlePageClick}
-                            pageRangeDisplayed={3}
-                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={4}
+                            marginPagesDisplayed={null}
                             pageCount={data?.total_pages}    //total pages
-                            previousLabel="< previous"
                             pageClassName="page-item"
                             pageLinkClassName="page-link"
                             previousClassName="page-item"
@@ -106,7 +99,7 @@ export const MoviePage = () => {
             <Container style={{marginTop: "50px"}}>
                 <Row>
                     <Col lg={4} xs={12} className="genre-badge-ground">
-                        {genreData.map((item) => <div itemID={item.name} className={genre == item.id ? "genre-item-selected":"genre-item"}
+                        {genreData.map((item) => <div itemID={item.name} className={genre === item.id ? "genre-item-selected":"genre-item"}
                                                        onClick={() => setGenre(item.id)}>{item.name}</div>)}
                     </Col>
                     <Col lg={8} xs={12}>

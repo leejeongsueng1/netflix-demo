@@ -1,7 +1,8 @@
-import 'react-multi-carousel/lib/styles.css';
+
 import Carousel from "react-multi-carousel";
 import {MovieCard} from "../MovieCard/MovieCard";
 import './MovieSlider.style.css'
+import 'react-multi-carousel/lib/styles.css';
 
 export const MovieSlider = ({title, data, responsive}) => {
 

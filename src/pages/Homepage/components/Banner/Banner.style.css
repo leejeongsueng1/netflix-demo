@@ -5,6 +5,7 @@
     background-size: cover;
 
 }
+
 /* 배너부분에 그라데이션 주기 */
 .Banner:before {
     content: '';
@@ -15,17 +16,32 @@
     width: 100%;
 }
 
-.banner-text-area {
-    width:36%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    padding:2rem;
-
-
+@media screen and (max-width: 600px) {
+    .banner-text-area {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 2rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
+
+@media screen and (min-width: 600px) {
+    .banner-text-area {
+        width: 36%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        padding: 2rem;
+    }
+}
+
+
 /* 앞으로 가져와서 텍스트가 그라데이션에 묻히는걸 방지*/
 .banner-text-area > * {
     z-index: 2;
 }
+

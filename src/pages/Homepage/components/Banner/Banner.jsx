@@ -5,7 +5,6 @@ import './Banner.style.css'
 export const Banner = () => {
 
     const {data, isLoading, isError, error} = usePopularMoviesQuery();
-    console.log('ddd', data);
     if (isLoading) {
         return (
             <div>
@@ -41,7 +40,7 @@ export const Banner = () => {
         >
             <div className="text-white banner-text-area">
                 <h1>{data?.results[0].title}</h1>
-                <p>{data?.results[0].overview}</p>
+                <div className="banner-overview">{data?.results[0].overview}</div>
             </div>
         </div>
     )
