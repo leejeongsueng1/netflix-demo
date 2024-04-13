@@ -93,7 +93,7 @@ export const MovieDetail = () => {
                     {review_data?.results.map((review, idx) => <Review review={review}/>)}
                 </Col> : <></>}
             </Container>
-            {(radioValue == 1) ? <></> : <Container><div><RecommendSlider className="recommendation" data={recommend_data}/></div></Container>}
+            {(radioValue == 1) ? <></> : <div><RecommendSlider className="recommendation" data={recommend_data}/></div>}
 
 
         </>)
