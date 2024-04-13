@@ -12,8 +12,6 @@ export const PopularMovieSlide = () => {
     if (isError) {
         return <Alert variant="danger">{error.message}</Alert>
     }
-
-
     return (
         <MovieSlider data={data} title={"Top Popular Movies"} responsive={responsive} />
     )

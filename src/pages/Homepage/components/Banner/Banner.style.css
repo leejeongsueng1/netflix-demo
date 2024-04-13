@@ -1,5 +1,5 @@
 .Banner {
-    height: 56vh;
+    height: 60vh;
     background-position: left;
     background-repeat: no-repeat;
     background-size: cover;
@@ -12,7 +12,7 @@
     background: linear-gradient(to top, black, transparent);
     position: absolute;
     left: 0;
-    height: 56vh;
+    height: 60vh;
     width: 100%;
 }
 
@@ -42,6 +42,6 @@
 
 /* 앞으로 가져와서 텍스트가 그라데이션에 묻히는걸 방지*/
 .banner-text-area > * {
-    z-index: 2;
+    z-index: 3;
 }
 

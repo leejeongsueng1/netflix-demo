@@ -1,0 +1,16 @@
+.previewModal {
+    width:70%;
+}
+
+.modal_header {
+    background-color: black;
+    color: whitesmoke;
+}
+.modal_body{
+    background-color: black;
+    color: whitesmoke;
+}
+.modal_footer{
+    background-color: black;
+    color: whitesmoke;
+}
