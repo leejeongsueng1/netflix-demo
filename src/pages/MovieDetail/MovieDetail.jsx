@@ -7,6 +7,10 @@ import {useMovieReviewQuery} from "../../hooks/UseMovieReviews";
 import {RecommendSlider} from "./RecommandSlider/RecommendSlider";
 import {Review} from "./Reivews/Review";
 import {MoviePreview} from "./Preview/MoviePreview";
+import './MovieDetail.style.css'
+import popularity from "./imgs/popularity.png";
+import rating from "./imgs/rating.png";
+
 
 export const MovieDetail = () => {
     const [modalShow, setModalShow] = useState(false);
@@ -43,7 +47,7 @@ export const MovieDetail = () => {
             <Col lg={7}>
                 <h1>{data?.title}</h1>
                 <div>{data?.genres.map(({name}) => <Badge className="m-lg-1" bg="danger"> {name}  </Badge>)}</div>
-                <div>{data?.vote_count} {data?.popularity} {data?.adult ?
+                <div className={"popularity-info"}><img style={{height:"30px",color:"whitesmoke", filter:"invert(100%) sepia(0%) saturate(7500%) hue-rotate(83deg) brightness(99%) contrast(103%)"}} src={popularity}/>{data?.vote_count} &nbsp;&nbsp; <img style={{height:"30px",color:"whitesmoke"}} src={rating}/>{data?.popularity} &nbsp; {data?.adult ?
                     <fragment style={{color: "red", fontWeight: "bold"}}>ADULT</fragment> :
                     <fragment style={{color: "green", fontWeight: "bold"}}>ALL</fragment>}</div>
                 <hr style={{border: "0", height: "3px", background: "white"}}/>

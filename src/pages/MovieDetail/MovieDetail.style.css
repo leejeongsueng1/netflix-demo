@@ -3,3 +3,8 @@
     flex-direction: Row;
 
 }
+
+.popularity-info {
+    font-size: 30px;
+    font-weight: bold;
+}

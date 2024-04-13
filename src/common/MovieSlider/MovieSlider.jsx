@@ -17,6 +17,8 @@ export const MovieSlider = ({title, data, responsive}) => {
                 itemClass="movie-slider p-1"
                 containerClass="carousel-container"
                 responsive={responsive}
+                autoPlay={true}
+                autoPlaySpeed={10000}
             >
                 {data.results.map((movie,idx)=><MovieCard  movie={movie} key={idx}/>)}
             </Carousel>
