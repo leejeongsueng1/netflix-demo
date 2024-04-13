@@ -1,15 +1,12 @@
 .carousel-container {
-    display:flex !important;
     height: 500px;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-
+    overflow:hidden;
 }
 
 @media (max-width: 600px) {
     .carousel-container {
         height: 530px;
-        display: flex !important;
-        justify-content: space-between !important;
+        /*display: flex !important;*/
+        /*justify-content: space-between !important;*/
     }
 }

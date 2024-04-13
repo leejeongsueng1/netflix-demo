@@ -22,7 +22,7 @@ export const MovieSlider = ({title, data, responsive}) => {
                 containerClass="carousel-container"
                 responsive={responsive}
             >
-                {data.results.map((movie,idx)=><div onClick={(event)=>handleClick(event,movie)}><MovieCard  movie={movie} key={idx}  /></div>)}
+                {data.results.map((movie,idx)=><MovieCard onClick={(event)=>handleClick(event,movie)} movie={movie} key={idx}/>)}
             </Carousel>
         </div>
     )
