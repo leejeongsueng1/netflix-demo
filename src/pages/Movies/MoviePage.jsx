@@ -39,13 +39,11 @@ export const MoviePage = () => {
     const setSortedData = (opt) => {
         setSortOpt(opt);
         if (opt == "Ascending") {
-            console.log(data);
             let tmp = data?.results.sort((a, b) => b.popularity - a.popularity);
             data.results = tmp;
             setMovieData(data);
         }
         if (opt == "Descending") {
-            console.log(data);
             let tmp = data?.results.sort((a, b) => a.popularity - b.popularity);
             data.results = tmp;
             setMovieData(data);
@@ -137,7 +135,6 @@ export const MoviePage = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu onClick={(event) => {
-                            console.log(event.target.text);
                             setSortedData(event.target.text);
                         }}>
                             {sortOptList?.map((opt) => <Dropdown.Item className="genre-item"

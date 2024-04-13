@@ -28,12 +28,6 @@ export const MovieDetail = () => {
     const {data: review_data} = useMovieReviewQuery(movieId);
     const {data: recommend_data} = useMovieRecommendQuery(movieId);
 
-
-    console.log(data);
-    console.log(review_data);
-    console.log(recommend_data);
-
-
     return (<Container>
         <MoviePreview show={modalShow} onHide={() => setModalShow(false)} movieId={movieId}/>
         <Row className="mt-5">
@@ -47,7 +41,12 @@ export const MovieDetail = () => {
             <Col lg={7}>
                 <h1>{data?.title}</h1>
                 <div>{data?.genres.map(({name}) => <Badge className="m-lg-1" bg="danger"> {name}  </Badge>)}</div>
-                <div className={"popularity-info"}><img style={{height:"30px",color:"whitesmoke", filter:"invert(100%) sepia(0%) saturate(7500%) hue-rotate(83deg) brightness(99%) contrast(103%)"}} src={popularity}/>{data?.vote_count} &nbsp;&nbsp; <img style={{height:"30px",color:"whitesmoke"}} src={rating}/>{data?.popularity} &nbsp; {data?.adult ?
+                <div className={"popularity-info"}><img style={{
+                    height: "30px",
+                    color: "whitesmoke",
+                    filter: "invert(100%) sepia(0%) saturate(7500%) hue-rotate(83deg) brightness(99%) contrast(103%)"
+                }} src={popularity}/>{data?.vote_count} &nbsp;&nbsp; <img style={{height: "30px", color: "whitesmoke"}}
+                                                                          src={rating}/>{data?.popularity} &nbsp; {data?.adult ?
                     <fragment style={{color: "red", fontWeight: "bold"}}>ADULT</fragment> :
                     <fragment style={{color: "green", fontWeight: "bold"}}>ALL</fragment>}</div>
                 <hr style={{border: "0", height: "3px", background: "white"}}/>
@@ -66,24 +65,26 @@ export const MovieDetail = () => {
                 <Row>
                     <ButtonGroup style={{margin: "10px 10px"}}>
                         {radios.map((radio, idx) => (<ToggleButton
-                                key={idx}
-                                id={`radio-${idx}`}
-                                type="radio"
-                                variant={'outline-danger'}
-                                name="radio"
-                                value={radio.value}
-                                checked={radioValue === radio.value}
-                                onChange={(e) => setRadioValue(e.currentTarget.value)}
-                                onClick={ (radio?.value==3) ? onClickPreiview:null}
-                            >
-                                {radio.name}
-                            </ToggleButton>))}
+                            key={idx}
+                            id={`radio-${idx}`}
+                            type="radio"
+                            variant={'outline-danger'}
+                            name="radio"
+                            value={radio.value}
+                            checked={radioValue === radio.value}
+                            onChange={(e) => setRadioValue(e.currentTarget.value)}
+                            onClick={(radio?.value == 3) ? onClickPreiview : null}
+                        >
+                            {radio.name}
+                        </ToggleButton>))}
                     </ButtonGroup>
                 </Row>
                 <Row className="button ">
-                    {(radioValue == 1) ? <Col>
-                        {review_data?.results.map((review, idx) => <Review review={review}/>)}
-                    </Col> : <Col className="recommendation"><RecommendSlider data={recommend_data}/></Col>}
+                    <Row>
+                        {(radioValue == 1) ? <Col>
+                            {review_data?.results.map((review, idx) => <Review review={review}/>)}
+                        </Col> : <Col lg={8} className="recommendation"><RecommendSlider data={recommend_data}/></Col>}
+                    </Row>
                 </Row>
             </Container>
         </Row>

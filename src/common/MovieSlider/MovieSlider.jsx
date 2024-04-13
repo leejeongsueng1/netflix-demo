@@ -2,7 +2,6 @@ import Carousel from "react-multi-carousel";
 import {MovieCard} from "../MovieCard/MovieCard";
 import './MovieSlider.style.css'
 import 'react-multi-carousel/lib/styles.css';
-import {useNavigate} from "react-router-dom";
 
 export const MovieSlider = ({title, data, responsive}) => {
 
@@ -20,7 +19,7 @@ export const MovieSlider = ({title, data, responsive}) => {
                 autoPlay={true}
                 autoPlaySpeed={10000}
             >
-                {data.results.map((movie,idx)=><MovieCard  movie={movie} key={idx}/>)}
+                {data?.results.map((movie,idx)=><MovieCard  movie={movie} key={idx}/>)}
             </Carousel>
         </div>
     )
